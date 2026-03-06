@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <title>GOD MODE AI</title>
+
+  <style>
+    body {
+      margin: 0;
+      background: black;
+      font-family: monospace;
+      color: #00ff00;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .container {
+      width: 95%;
+      max-width: 500px;
+      height: 95vh;
+      background: #000;
+      border: 2px solid #00ff00;
+      display: flex;
+      flex-direction: column;
+      padding: 10px;
+      box-shadow: 0 0 30px #00ff00;
+    }
+
+    .title {
+      text-align: center;
+      font-size: 18px;
+      margin-bottom: 5px;
+    }
+
+    .avatar {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      background: #00ff00;
+      margin: 5px auto;
+      position: relative;
+    }
+
+    .mouth {
+      width: 40px;
+      height: 10px;
+      background: black;
+      position: absolute;
+      bottom: 20px;
+      left: 20px;
+      transition: 0.1s;
+    }
+
+    #chat {
+      flex: 1;
+      overflow: auto;
+      border: 1px solid #00ff00;
+      padding: 5px;
+      margin-bottom: 5px;
+    }
+
+    input {
+      width: 70%;
+      padding: 5px;
+      background: black;
+      color: #00ff00;
+      border: 1px solid #00ff00;
+    }
+
+    button {
+      padding: 5px;
+      background: #003300;
+      color: #00ff00;
+      border: 1px solid #00ff00;
+      cursor: pointer;
+    }
+
+    @media(max-width:600px) {
+      .container {
+        height: 100vh;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="container">
+
+    <div class="title">☠ GOD MODE AI ☠</div>
+
+    <div class="avatar">
+      <div class="mouth" id="mouth"></div>
+    </div>
+
+    <div id="chat"></div>
+
+    <div>
+      <input type="text" id="question">
+      <button onclick="askAI()">Send</button>
+      <button onclick="startVoice()">🎤</button>
+    </div>
+
+  </div>
+
+  <script>
+
+    let chat = document.getElementById("chat");
+    let mouth = document.getElementById("mouth");
+    let memory = JSON.parse(localStorage.getItem("godMemory")) || {};
+    let history = JSON.parse(localStorage.getItem("godHistory")) || [];
+
+    history.forEach(m => {
+      addMessage(m.text, m.type, false);
+    });
+
+    function addMessage(text, type, save = true) {
+      let p = document.createElement("div");
+      p.innerHTML = "<b>" + (type == "user" ? "YOU" : "AI") + ":</b> " + text;
+      chat.appendChild(p);
+      chat.scrollTop = chat.scrollHeight;
+
+      if (save) {
+        history.push({ text, type });
+        localStorage.setItem("godHistory", JSON.stringify(history));
+      }
+    }
+
+    function animateMouth() {
+      mouth.style.height = "25px";
+      setTimeout(() => mouth.style.height = "10px", 150);
+    }
+
+    function typingEffect(text) {
+      let p = document.createElement("div");
+      chat.appendChild(p);
+      let i = 0;
+
+      let interval = setInterval(() => {
+        p.innerHTML = "<b>AI:</b> " + text.substring(0, i);
+        animateMouth();
+        i++;
+        if (i > text.length) clearInterval(interval);
+        chat.scrollTop = chat.scrollHeight;
+      }, 20);
+    }
+
+    function smartReply(q) {
+      if (q.includes("hello")) return "Hello Hacker 😎";
+      if (q.includes("your name")) return "I am GOD MODE AI.";
+      return null;
+    }
+
+    async function searchWeb(q) {
+      let url = `https://api.duckduckgo.com/?q=${q}&format=json&no_html=1`;
+      try {
+        let res = await fetch(url);
+        let data = await res.json();
+        if (data.AbstractText) return data.AbstractText;
+        return "No clear result found online.";
+      } catch {
+        return "Online search failed.";
+      }
+    }
+
+    async function askAI() {
+      let input = document.getElementById("question");
+      let q = input.value.trim().toLowerCase();
+      if (!q) return;
+
+      addMessage(q, "user");
+      input.value = "";
+
+      if (memory[q]) {
+        typingEffect(memory[q]);
+        return;
+      }
+
+      let local = smartReply(q);
+      if (local) {
+        typingEffect(local);
+        return;
+      }
+
+      typingEffect("Searching the web... 🌐");
+
+      let webAnswer = await searchWeb(q);
+
+      setTimeout(() => {
+        typingEffect(webAnswer);
+
+        if (webAnswer == "No clear result found online.") {
+          setTimeout(() => {
+            let learn = prompt("Teach me the answer:");
+            if (learn) {
+              memory[q] = learn;
+              localStorage.setItem("godMemory", JSON.stringify(memory));
+              typingEffect("Knowledge Updated ☠");
+            }
+          }, 1000);
+        }
+
+      }, 1000);
+    }
+
+    function startVoice() {
+      let recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
+      recognition.lang = "en-US";
+      recognition.start();
+      recognition.onresult = function (e) {
+        document.getElementById("question").value = e.results[0][0].transcript;
+        askAI();
+      };
+    }
+
+  </script>
+
+</body>
+
+</html>

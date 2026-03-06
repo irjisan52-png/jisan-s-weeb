@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Advanced 3D Page</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: Arial, sans-serif;
+    }
+
+    body {
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: url("background.jpg") no-repeat center center/cover;
+      overflow: hidden;
+    }
+
+
+    /* Gradient Overlay */
+    body::before {
+      content: "";
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(135deg, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.3));
+      z-index: 0;
+    }
+
+    /* Welcome Text */
+    .welcome {
+      position: absolute;
+      top: 40px;
+      font-size: 40px;
+      color: white;
+      text-shadow: 0 5px 15px rgba(0, 0, 0, 0.8);
+      z-index: 2;
+    }
+
+    /* 3D Card */
+    .card {
+      position: relative;
+      width: 380px;
+      padding: 40px 30px;
+      border-radius: 20px;
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(25px);
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.7);
+      transform-style: preserve-3d;
+      transition: 0.2s;
+      text-align: center;
+      color: white;
+      z-index: 2;
+      overflow: hidden;
+    }
+
+    /* Animated glowing border */
+    .card::before {
+      content: "";
+      position: absolute;
+      inset: -2px;
+      border-radius: 20px;
+      background: linear-gradient(45deg, #00f2ff, #ff00c8, #00f2ff);
+      background-size: 400%;
+      animation: glow 6s linear infinite;
+      z-index: -1;
+    }
+
+    @keyframes glow {
+      0% {
+        background-position: 0%
+      }
+
+      100% {
+        background-position: 400%
+      }
+    }
+
+    /* Moving light effect */
+    .card::after {
+      content: "";
+      position: absolute;
+      top: -100%;
+      left: -100%;
+      width: 200%;
+      height: 200%;
+      background: linear-gradient(120deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+      transform: rotate(25deg);
+      animation: lightMove 5s infinite;
+    }
+
+    @keyframes lightMove {
+      0% {
+        top: -100%;
+        left: -100%;
+      }
+
+      100% {
+        top: 100%;
+        left: 100%;
+      }
+    }
+
+    /* Menu */
+    .menu {
+      margin-bottom: 25px;
+    }
+
+    .menu a {
+      text-decoration: none;
+      color: white;
+      margin: 8px;
+      font-size: 15px;
+      transition: 0.3s;
+    }
+
+    .menu a:hover {
+      color: #00ffff;
+    }
+
+    /* Buttons */
+    button {
+      width: 100%;
+      padding: 12px;
+      margin-bottom: 15px;
+      border: none;
+      border-radius: 6px;
+      background: #1a73e8;
+      color: white;
+      font-weight: bold;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    button:hover {
+      background: #1669c1;
+    }
+
+    /* Dark Mode */
+    .dark {
+      background: #111 !important;
+    }
+
+    .dark .card {
+      background: rgba(0, 0, 0, 0.6);
+    }
+
+    .toggle {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      z-index: 3;
+    }
+  </style>
+</head>
+
+<body>
+
+  <button class="toggle" onclick="toggleMode(3)">🌙</button>
+
+  <h1 class="welcome">Welcome To My Page</h1>
+
+  <div class="card" id="card">
+
+    <div class="menu">
+      <a href="home.html">Home</a>
+      <a href="Ask AI.html">About Me</a>
+      <a href="im.html">I'm</a>
+      <a href="contact.html">Contact</a>
+    </div>
+
+    <p>This is my next level 3D smart homepage.</p>
+
+    <a href="login-pro.html"><button>Log In</button></a>
+    <a href="signup-pro.html"><button>Sign Up</button></a>
+
+  </div>
+
+  <script>
+
+    /* Real 3D Mouse Tilt */
+    const card = document.getElementById("card");
+
+    document.addEventListener("mousemove", (e) => {
+      let x = (window.innerWidth / 2 - e.pageX) / 25;
+      let y = (window.innerHeight / 2 - e.pageY) / 25;
+      card.style.transform = `rotateY(${x}deg) rotateX(${y}deg)`;
+    });
+
+    /* Dark / Light Toggle */
+    function toggleMode() {
+      document.body.classList.toggle("dark");
+    }
+
+  </script>
+
+</body>
+
+</html>

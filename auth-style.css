@@ -1,0 +1,96 @@
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:Arial;
+}
+
+body{
+  height:100vh;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  background:url("background.jpg") no-repeat center center/cover;
+}
+
+body::before{
+  content:"";
+  position:absolute;
+  width:100%;
+  height:100%;
+  background:linear-gradient(rgba(0,0,0,0.7),rgba(0,0,0,0.4));
+}
+
+.welcome{
+  position:absolute;
+  top:40px;
+  color:white;
+  font-size:35px;
+  z-index:2;
+}
+
+.card{
+  position:relative;
+  width:350px;
+  padding:35px;
+  border-radius:20px;
+  background:rgba(255,255,255,0.1);
+  backdrop-filter:blur(20px);
+  box-shadow:0 20px 40px rgba(0,0,0,0.6);
+  text-align:center;
+  color:white;
+  z-index:2;
+  animation:fadeIn 1s ease;
+}
+
+@keyframes fadeIn{
+  from{opacity:0; transform:scale(0.9);}
+  to{opacity:1; transform:scale(1);}
+}
+
+input{
+  width:100%;
+  padding:12px;
+  margin-bottom:15px;
+  border:none;
+  border-radius:6px;
+  outline:none;
+}
+
+.password-box{
+  position:relative;
+}
+
+.password-box span{
+  position:absolute;
+  right:10px;
+  top:12px;
+  cursor:pointer;
+}
+
+button{
+  width:100%;
+  padding:12px;
+  border:none;
+  border-radius:6px;
+  background:#1a73e8;
+  color:white;
+  font-weight:bold;
+  cursor:pointer;
+  transition:0.3s;
+}
+
+button:hover{
+  background:#1669c1;
+  transform:scale(1.05);
+}
+
+.switch{
+  margin-top:15px;
+  font-size:14px;
+}
+
+.switch a{
+  color:#00ffff;
+  text-decoration:none;
+}

@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>AI Finance App</title>
+
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial;
+      background: #0f172a;
+      color: white;
+    }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      padding: 20px;
+      background: #020617;
+    }
+
+    nav button {
+      margin: 5px;
+      padding: 10px 15px;
+      border: none;
+      border-radius: 8px;
+      background: #1e293b;
+      color: white;
+      cursor: pointer;
+    }
+
+    .hero {
+      position: relative;
+      height: 500px;
+      overflow: hidden;
+    }
+
+    .slider img {
+      width: 100%;
+      height: 500px;
+      object-fit: cover;
+      position: absolute;
+      animation: slide 16s infinite;
+    }
+
+    .slider img:nth-child(2) {
+      animation-delay: 4s;
+    }
+
+    .slider img:nth-child(3) {
+      animation-delay: 8s;
+    }
+
+    .slider img:nth-child(4) {
+      animation-delay: 12s;
+    }
+
+    @keyframes slide {
+      0% {
+        opacity: 0
+      }
+
+      10% {
+        opacity: 1
+      }
+
+      25% {
+        opacity: 1
+      }
+
+      35% {
+        opacity: 0
+      }
+
+      100% {
+        opacity: 0
+      }
+    }
+
+    .text {
+      position: absolute;
+      top: 40%;
+      left: 50px;
+      max-width: 400px;
+    }
+
+    .start {
+      position: absolute;
+      bottom: 30px;
+      right: 30px;
+      padding: 20px 40px;
+      font-size: 20px;
+      border: none;
+      border-radius: 15px;
+      background: #22c55e;
+      color: white;
+      cursor: pointer;
+    }
+
+    .info,
+    .features {
+      padding: 50px;
+      text-align: center;
+    }
+
+    .features li {
+      margin: 10px;
+    }
+  </style>
+
+</head>
+
+<body>
+
+  <header>
+
+    <h2>AI Finance</h2>
+
+    <nav>
+
+      <button>Home</button>
+      <button>Features</button>
+      <button>About</button>
+      <button>Contact</button>
+
+    </nav>
+
+  </header>
+
+  <section class="hero">
+
+    <div class="slider">
+
+      <img src="bg1.jpg">
+      <img src="bg2.jpg">
+      <img src="bg3.jpg">
+      <img src="bg4.jpg">
+
+    </div>
+
+    <div class="text">
+
+      <h1>Smart AI Expense Manager</h1>
+
+      <p>
+
+      </p>
+    </div>
+    <a href="start.html">
+      <button class="start">Get Start</button>
+    </a>
+
+  </section>
+
+  <section class="info">
+
+    <h2>About Our App</h2>
+
+    <>
+      This application helps track expenses, analyze spending,
+      and manage financial data securely from any device.
+      **Smart AI Expense Manager**
+
+      Smart AI Expense Manager is a modern financial management application designed to help users track and manage
+      their
+      daily expenses easily and efficiently. The app allows users to record their personal spending, organize financial
+      data,
+      and maintain a clear overview of their financial activities.
+
+      With a secure account system, users can create an account and log in using their email and password. This allows
+      them to
+      access their financial data from any device, including mobile phones and computers. All information is stored
+      safely so
+      users can view their expense history anytime.
+
+      The application also includes an AI-powered assistant that analyzes spending patterns and provides helpful
+      suggestions.
+      For example, if a user’s monthly spending becomes too high, the AI can give warnings and recommend ways to control
+      expenses.
+
+      The main goal of Smart AI Expense Manager is to make financial tracking simple, improve money management, and help
+      users
+      build better financial habits for the future.
+
+      </p>
+
+  </section>
+
+  <section class="features">
+
+    <h2>Features</h2>
+
+    <ul>
+
+      <li>AI Expense Analysis</li>
+      <li>Secure Account System</li>
+      <li>Mobile + Desktop Access</li>
+      <li>Cloud Data Storage</li>
+
+    </ul>
+
+  </section>
+
+</body>
+
+</html>
